@@ -42,6 +42,26 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const register = async (username, email, password) => {
+    try {
+      // Typically this goes to backend: await api.post('/auth/register', { username, email, password })
+      // For demo, we simulate
+      const mockToken = "mock-jwt-token";
+      const userObj = { token: mockToken, role: 'student', name: username };
+      
+      localStorage.setItem('token', mockToken);
+      localStorage.setItem('role', 'student');
+      localStorage.setItem('name', username);
+      
+      setUser(userObj);
+      navigate('/student/dashboard');
+      return { success: true };
+    } catch (error) {
+      console.error(error);
+      return { success: false, message: 'Registration failed' };
+    }
+  };
+
   const logout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('role');
@@ -51,7 +71,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, logout }}>
+    <AuthContext.Provider value={{ user, loading, login, logout, register }}>
       {!loading && children}
     </AuthContext.Provider>
   );
