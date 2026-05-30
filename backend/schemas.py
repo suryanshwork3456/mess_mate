@@ -50,3 +50,13 @@ class ComplaintCategoryResponse(BaseModel):
     total_active: int
     categories: List[CategoryCount]
 
+class TaskOut(BaseModel):
+    id: int
+    title: str
+    description: str
+    priority: str
+    status: str
+    time: str
+
+    class Config:
+        from_attributes = True  # Allows Pydantic to read SQLAlchemy models
