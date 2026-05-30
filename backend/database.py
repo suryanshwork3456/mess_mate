@@ -6,3 +6,4 @@ DATABASE_URL = "postgresql://postgres:postgresaks@localhost:5432/messmate"
 
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+Base = declarative_base()
